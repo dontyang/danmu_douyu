@@ -1,24 +1,15 @@
-# README
+# 斗鱼弹幕抓取
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+方法比较愚，但是万能，通过分析斗鱼的弹幕结构，解析数据，然后POST到服务端存储。
 
-Things you may want to cover:
+启动本地服务，把app/assets/javascripts/danmu.js的代码直接Copy到浏览器控制台，就OK了。
 
-* Ruby version
+需要注意的有两点：
 
-* System dependencies
+* 1.斗鱼是https请求，所以需要配置本地的nginx的ssl，然后通过https访问本地。
 
-* Configuration
+* 2.关闭rails的防跨站攻击。
 
-* Database creation
+可能斗鱼弹幕html结构会变换，得重新解析。
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+                                                                                      2017-07-31 21:50:11
