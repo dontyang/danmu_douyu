@@ -1,0 +1,2 @@
+class Danmu < ApplicationRecord
+end
