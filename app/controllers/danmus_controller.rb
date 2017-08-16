@@ -1,19 +1,23 @@
 class DanmusController < ApplicationController
 
 	def create
-		danmu = Danmu.new(danmu_params.slice(:room_id, :room_name, :chat_id, :fans_name))
-		danmu.user_level = danmu_params[:user_level].gsub(/[^0-9]/, '')
-		danmu.user_name = danmu_params[:user_name].gsub('：', '').to_s.strip
-		danmu.content = danmu_params[:content].to_s.strip
-		danmu.fans_level = danmu_params[:fans_level].to_i
-		danmu.save
+		danmu_params.each do |k, v|
+			if v[:user_name].present? && v[:user_level].present?
+				Danmu.create(v.slice(:room_id, :room_name, :chat_id, :fans_name)
+											.merge(user_level: v[:user_level].gsub(/[^0-9]/, ''),
+														 user_name: v[:user_name].gsub('：', '').to_s.strip,
+														 content: v[:content].to_s.strip,
+														 fans_level: v[:fans_level].to_i,
+														 created_at: v[:created_at].to_time.localtime.to_s(:db)))
+			end
+		end
 		render json: {result: :success}
 	end
 
 	private
 
 	def danmu_params
-		params.permit(:user_level, :user_name, :content, :chat_id, :fans_name, :fans_level, :room_name, :room_id)
+		params.require(:data).permit!
 	end
 
 end

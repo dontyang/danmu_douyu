@@ -1,6 +1,5 @@
 // 会话ID缓存，重复的弹幕不发送到服务端
 var chat_id_cache = []
-
 // 定时器执行方法
 function post_data(){
 	// 解析html，获取数据
@@ -36,8 +35,6 @@ function post_data(){
 
 	});
 }
-
 // 定时任务，一秒执行一次
 setInterval("post_data();", 1000);
-
 
